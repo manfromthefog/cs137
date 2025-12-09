@@ -1,5 +1,5 @@
 #include <stdio.h>
-// https://www.programiz.com/online-compiler/9puBOfX2IYLFC
+// https://www.programiz.com/online-compiler/0F3ulR2Uh9sse
 
 int merge_time(int a[][2], int n) {
     if (n<2) return n;

@@ -1,1 +1,2 @@
-Coursework from University of Waterloo's CS137 course.
+Coursework from CS 137, University of Waterloo.
+Minimal coding experience in C prior to the course.

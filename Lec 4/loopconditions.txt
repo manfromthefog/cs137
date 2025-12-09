@@ -1,0 +1,53 @@
+Break & Continue Statements
+
+Similar to switch statements, you can the break; comand to end a while, do or for statement early.
+C also has a continue; statement that allows you to exit the loop body early and go to just before the end of the loop body.
+
+!!! goto; is not allowed in CS137 !!!
+
+Nested Loops
+
+int i, j;
+for (i = 1; i <= 10; i++) {
+    for (j = 1; j <= i; j++) {
+        printf("$");
+    }
+    printf("\n");
+}
+return 0;
+
+Prints a total of 1+...+10 = 55 $ on a newline.
+
+Example 1
+
+int num, sum;
+scanf("%d", &num);
+for (sum = 0; num > 0; num = num / 10) {
+    sum += num  % 10;
+}
+printf("%d", sum);
+
+Implementation of the Euclidean Algorithm
+
+###
+
+The scanf() Function
+
+scanf() returns the number of items it properly had read successfully. Let's implement a number checking system.
+
+int d = 0;
+int sum = 0;
+
+while(scanf("%d", &d) == 1) {
+    sum += d;
+}
+printf("%d\n", sum);
+
+The Prime Number Problem
+1. Problem-Solving
+2. Optimization
+3. Best Programming Practices
+4. Testing
+
+Idea 1. Count all divisors of prime numbers, and the number of divisors is 2, we have a prime number.
+Idea 2. Search for a single divisor, not 1 or n, and if we find one return false.

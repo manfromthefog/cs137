@@ -1,0 +1,186 @@
+#include <stdio.h>
+
+int max (int a, int b) {
+    return a > b ? a : b;
+}
+int main(void) {
+    printf("%d", max(5, 10));
+    return 0;
+}
+
+The code finds the two parameters and assigns it to the function.
+!!! A function is a one-to-one transformation of one set of data to another.
+
+Once we return the address memory the function is no longer usable. Do not assume the variables in the function are usable! If max() is called again a new stack is created for the new function. The old variables are inaccessible.
+
+!!! Each function has its own place in memory. If we had int a,b in main() they would have different memory than the a,b we defined in the function.
+
+Global variables can be accessed by any function. If you want to keep track of the values, there are possibilities. For us, we will not use global variables.
+
+Example 1
+
+int mystery(int n) {
+    int total = 0;
+    for (int i = 0; i < n; i++) {
+        total += i;
+        return total;
+    }
+}
+
+int main(void) {
+    printf("%d", mystery(5));
+    return 0;
+}
+
+The above program directly returns "total" on the first loop. The total on the first loop is 0, and the loop ends.
+!!! The return statement stops the loop if and only if it's inside the function.
+
+When you call a function, and you pass variables into a function, you pass values, not memory. A change in the function is not a change in main().
+
+Scope of Variables
+
+int main(void) {
+    for (int i = 1; j <= 10; i++) {
+        for (int j = 1; j <= i; j++) {
+            printf("$");
+        }
+    }
+    return 0;
+}
+
+We need to understand that the scope of j is limited to the for loop of j, and the scope of i is limited to the loop of i.
+
+*Boolean Variables
+
+Secretly unsigned integers in disguise. The words true and false are also available in this library.
+if (statement == True) can be written as if (statement) in short.
+
+Use #include <stdbool.h>
+
+*Function Declarations
+
+A function MUST be declared before it is used.
+
+bool isPrime (int n); // would be a function declartion.
+
+int main(void) {
+    ...
+}
+
+int main(void) {
+    int div = 2;
+    if (n <= 1) {
+        printf("Not Prime\n");
+    }
+    else {
+        // A mathematical fact that you only have to search for divisors up to sqrt(n)
+        while (div * div <= n) {
+            if (n % div == 0) {
+                break;
+            }
+            div++;
+        }
+        if (div * div <= 0) {
+            printf("Not Prime\n");
+        }
+        else {
+            printf("Prime\n");
+        }   
+    }
+}
+
+bool isPrime(int n)
+{
+    int div = 2;
+    if (n <= 1) 
+        return false;
+    // The following print is for tracing variables to understand the process
+    printf("n=%d, div=%d\n", n, div);
+    while (div * div <= n)
+    {
+        if (n % div == 0)
+            return false;
+        div++; 
+        // The following print is for tracing
+        // variables to understand the process
+        printf("n=%d, div=%d\n", n, div);
+    }
+    return true;
+}
+
+Assert
+
+In general, assert(expr); immediately terminates the program if and only if the expression is false.
+Must use #include <assert.h>
+
+Assert has several use cases.
+1. Test case checking.
+2. Prevention of fatal errors to safeguard the system.
+3. Validate the input / outputs.
+
+
+Modules and Compiling
+
+In the "real world, " programs are coded by many programmers. It is often inefficient to all be working on the same file, and it can get very confusing when you have millions of lines of code. Therefore, we want to modularize the design and reduce compile time. 
+
+Modular programming divides the program into separate sub-programs where each subprogram serves a specific goal. Breaking the large program into small problems increases the readability and maintainability of the program and the reusability of the small subprograms.
+
+Each module has a well-defined interface that specifies what services the module provides, as well as an implementation part that hides the code and other details from the user (by providing an executable file to the user so they can't read the actual implementation but yet can use the provided functions listed in the interface with documentation).
+
+An additional advantage is that changing the implementation without changing the interface does not require the user to change the main program that uses/includes those modules. Also, it is much easier to debug a program this way.
+
+powers.had
+#ifndef POWERS_H // Prevents multiple inclusion
+#define POWERS_H
+
+// num is a valid integer, and post returns the square of num.
+
+int square(int num);
+int cube(int num);
+int quartic(int num);
+int quintic(int num);
+#endif
+
+#include "powers.h" // notice the quotes! it's MY library, not a C library.
+
+int square(int num) { return num * num ;}
+int cube(int num) { return num * square (num );}
+int quartic(int num) { return square(num)* square(num);}
+int quintic(int num) { return square(num)* cube(num);}
+
+Compiling
+
+gcc powers -o power powers.c main.c
+./powers
+
+Source File -> Preprocessor -> Compiler -> Assembly Code -> Assembler -> Object Code -> Linker <- Libraries
+
+Example
+
+#include <stdio.h>
+#define PI 3.1415
+
+int main(void) {
+    int r = 3;
+    printf("Approximate area : %f", PI * r * r);
+    return 0;
+}
+
+We’ve already seen three macros, namely #include, #ifndef and
+#define.
+1. In fact, we can use the #define to define constants in our code.
+2. Syntax: #define identifier replacement_list
+3. Notice that you don’t need an equal sign or a semicolon - this is a straight replacement.
+4. This can be useful for constants in your code.
+
+Example
+
+#include <stdio.h>
+#define PI 2 + 2
+
+int main(void) {
+    printf("Product of 4 and 3 is %d", FOUR * 3);
+    return 0;
+}
+
+Be careful! Because of preprocessing, the program does not evaluate 2 + 2. Hence the program evaluates as 2 + 2 * 3 = 8. Putting brackets around the condition is not permitted. The moral of the story is that you should never put expressions in macros, rather constants.

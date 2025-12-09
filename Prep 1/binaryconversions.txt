@@ -1,0 +1,62 @@
+1. Negative Numbers in Binary
+    a. Use the last bit to signify the sign.
+    b. Complement every bit (flip all the bits).
+
+2. Signed Decimal to Binary Conversion (2 Complement)
+    eg. 1111 is negative so we take the 2's complement to 0111.
+        0111 = 2^0+2^1+2^2 = 7
+
+
+!! Example !!
+
+a = 0001, b = 0101
+
+~a = 1110
+a & b = 0001
+a | b = 0101
+~a | b = 1111
+a << 2 = 0100
+b << 1 = 1010
+
+!!! Questions !!!
+MCQ1 
+    A (00010100)
+
+    All other numbers are odd, hence by exclusion A and D are the only possible answers.
+    2^2 + 2^4 = 20.
+
+MCQ4
+    B (00001)
+
+    a = 00110, b = 00001, c = 00010
+    ~a = 11001
+    ~a | b = 11001
+    c >> 1 = 00001
+    (~ a | b) & (c >> 1) == 00001
+
+MCQ5
+    B (>>)
+
+    The rightshift is equivalent to divide by a power of 2 in base 2.
+
+MCQ6
+    D (None of the Above)
+
+    Start by shifting 1 left by 4 into 10000.
+    16 shares no bits with 15 (01111).
+
+MCQ7
+    C (8)
+
+    Start by shifting 1 left by 3 to 1000
+    8 shares the 8 bit in common with 25 (11001) hence the output is 8.
+
+MCQ8
+    C (-20)
+
+    -20 & 1 is still -20. This is a common sense check.
+
+MCQ9
+    1
+
+    Since 1 != 2.10,

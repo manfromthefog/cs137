@@ -1,0 +1,5 @@
+"Enter a positive number: "
+"Invalid input\n"
+"Approximated ln(%.2f) = %.8f\n"
+"math.h ln(%.2f) = %.8f\n"
+"Absolute difference = %.8f\n"
